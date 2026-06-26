@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Car Tuning Planner</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="panel control-panel" aria-label="車輛設定">
+      <header class="panel-header">
+        <div>
+          <p class="eyebrow">Car Tuning Planner</p>
+          <h1>車輛改裝優先順序</h1>
+          <p>先補安全與底盤，再追動力。輸入目前狀態，立即產生建議。</p>
+        </div>
+        <button id="resetBtn" class="icon-button" type="button" aria-label="重設">↺</button>
+      </header>
+
+      <div class="car-visual" aria-hidden="true">
+        <div class="car-body">
+          <span class="window"></span>
+          <span class="light"></span>
+        </div>
+        <span class="wheel wheel-front"></span>
+        <span class="wheel wheel-rear"></span>
+      </div>
+
+      <div class="settings-grid">
+        <label>
+          <span>用途</span>
+          <select id="goalSelect">
+            <option value="street">日常街車</option>
+            <option value="mountain">山路操控</option>
+            <option value="track">賽道日</option>
+            <option value="drag">直線加速</option>
+          </select>
+        </label>
+        <label>
+          <span>預算</span>
+          <input id="budgetInput" type="number" min="0" step="1000" value="80000">
+        </label>
+      </div>
+
+      <div id="inputs" class="inputs-list"></div>
+
+      <div class="actions">
+        <button id="sampleBtn" type="button" class="secondary-button">載入範例車況</button>
+        <button id="saveBtn" type="button" class="primary-button">儲存設定</button>
+      </div>
+    </section>
+
+    <section class="results" aria-label="分析結果">
+      <section class="summary-grid">
+        <article>
+          <span>第一優先</span>
+          <strong id="topUpgrade">-</strong>
+          <small id="topReason">-</small>
+        </article>
+        <article>
+          <span>預算狀態</span>
+          <strong id="budgetStatus">-</strong>
+          <small id="budgetDetail">-</small>
+        </article>
+        <article>
+          <span>風險提醒</span>
+          <strong id="riskStatus">-</strong>
+          <small id="riskDetail">-</small>
+        </article>
+      </section>
+
+      <section class="panel plan-panel">
+        <header class="section-header">
+          <div>
+            <h2>建議改裝順序</h2>
+            <p>依照用途、缺口、相依風險與預算排序。</p>
+          </div>
+        </header>
+        <ol id="upgradeList" class="upgrade-list"></ol>
+      </section>
+
+      <section class="chart-grid">
+        <figure class="panel">
+          <figcaption>各系統缺口</figcaption>
+          <canvas id="gapChart" width="760" height="360"></canvas>
+        </figure>
+        <figure class="panel">
+          <figcaption>預算分配</figcaption>
+          <canvas id="budgetChart" width="760" height="360"></canvas>
+        </figure>
+      </section>
+
+      <section class="panel notes-panel">
+        <header class="section-header">
+          <div>
+            <h2>調校提醒</h2>
+            <p>避免只堆馬力，忽略煞車、輪胎、散熱與資料紀錄。</p>
+          </div>
+        </header>
+        <div id="notes" class="notes"></div>
+      </section>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
